@@ -1,316 +1,273 @@
-
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tashan Sureshot</title>
+  <title>Free Giftcodes Daily</title>
   <style>
     * { 
-      box-sizing: border-box; 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
     body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
       min-height: 100vh;
-      touch-action: manipulation;
-    }
-    .main-wrapper {
-      width: 100%;
-      max-width: 550px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-    
-    /* Horizontal Slider Styles */
-    .testimonial-container {
-      width: 100%;
-      margin-bottom: 30px;
-      overflow: hidden;
-      position: relative;
-      height: 140px;
-    }
-    .testimonial-track {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      animation: slideHorizontal 30s linear infinite;
-    }
-    @keyframes slideHorizontal {
-      0% { transform: translateX(0); }
-      33.33% { transform: translateX(-33.33%); }
-      66.66% { transform: translateX(-66.66%); }
-      100% { transform: translateX(0); }
-    }
-    .testimonial-item {
-      width: 95%;
-      flex-shrink: 0;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      font-size: 18px;
-      color: #fff;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.1);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 380px;
       text-align: center;
-      line-height: 1.4;
-      margin-right: 20px;
     }
     
-    .center-card {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px;
-      border-radius: 20px;
+    /* Animated Sticker */
+    .sticker-container {
       margin-bottom: 30px;
-      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
     }
-    .logo {
-      font-size: 32px;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 10px;
+    .sticker {
+      font-size: 120px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
     }
-    .tagline {
-      font-size: 20px;
-      color: #ccc;
-      line-height: 1.4;
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
     }
-    .cta-button {
-      margin: 25px auto 20px;
-      padding: 18px 30px;
-      font-size: 22px;
-      background: #f00;
-      color: white;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      box-shadow: 0 0 20px #f00;
-      transition: background 0.3s;
-      width: 100%;
-      max-width: 350px;
-      display: block;
-      font-weight: bold;
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); }
+      50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
     }
-    .cta-button:active {
-      background: #cc0000;
-      transform: scale(0.98);
-    }
-    .redirect-timer {
-      font-size: 22px;
-      color: #ff0;
-      margin: 20px 0;
-      font-weight: bold;
-      text-shadow: 0 0 8px #ff0;
-    }
-    .trust-card, .features, .live-counter {
-      margin-top: 30px;
-      width: 100%;
-    }
-    .trust-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 25px;
-      border-radius: 15px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .trust-card div {
-      margin: 12px 0;
-      color: #ffe58f;
-      font-size: 20px;
-    }
-    .features h2 {
+    
+    /* Title */
+    .title {
       font-size: 24px;
-      margin-bottom: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .features ul {
-      list-style: none;
-      padding: 0;
-      font-size: 20px;
+    .subtitle {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 40px;
     }
-    .features li {
-      margin: 12px 0;
-      color: #ccc;
-      line-height: 1.5;
+    
+    /* CTA Button - CENTERED AND ANIMATED */
+    .cta-btn {
+      width: 100%;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff4655, #ff1744);
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto 30px;
+      box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
+      animation: pulse-btn 2s ease-in-out infinite;
+      transition: transform 0.2s;
     }
-    .exit-popup {
-      position: fixed;
+    .cta-btn:before {
+      content: '';
+      position: absolute;
       top: 50%;
       left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.95);
-      color: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      border: 2px solid #f00;
-      box-shadow: 0 0 25px #f00;
-      display: none;
-      z-index: 1000;
-      width: 90%;
-      max-width: 400px;
-      font-size: 20px;
-      text-align: center;
+      transition: width 0.6s, height 0.6s;
     }
-    .exit-popup h3 {
-      margin-top: 0;
-      font-size: 24px;
-      color: #ffe58f;
+    .cta-btn:active:before {
+      width: 300px;
+      height: 300px;
     }
-    .exit-popup button {
-      margin-top: 20px;
-      padding: 15px 25px;
-      background: #f00;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 20px;
-      cursor: pointer;
-      width: 100%;
-      font-weight: bold;
+    .cta-btn:active {
+      transform: scale(0.95);
     }
-    .live-counter {
-      font-size: 20px;
-      color: #0f0;
-      text-shadow: 0 0 10px #0f0;
-      text-align: center;
+    @keyframes pulse-btn {
+      0%, 100% { 
+        box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
+        transform: scale(1);
+      }
+      50% { 
+        box-shadow: 0 10px 60px rgba(255, 23, 68, 0.8);
+        transform: scale(1.02);
+      }
+    }
+    
+    /* Minimal Stats */
+    .stats {
+      display: flex;
+      justify-content: space-around;
       margin-bottom: 30px;
-      font-weight: bold;
+      padding: 20px 0;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-icon {
+      font-size: 32px;
+      margin-bottom: 5px;
+      display: inline-block;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .stat:nth-child(1) .stat-icon { animation-delay: 0s; }
+    .stat:nth-child(2) .stat-icon { animation-delay: 0.3s; }
+    .stat:nth-child(3) .stat-icon { animation-delay: 0.6s; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffd700;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: #666;
+    }
+    
+    /* Live Badge */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #4caf50;
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: #4caf50;
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.3); }
+    }
+    
+    /* Features - Minimal */
+    .features {
+      margin-top: 30px;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 0;
+      font-size: 13px;
+      color: #999;
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-right: 10px;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+    .feature:nth-child(1) .feature-icon { animation-delay: 0s; }
+    .feature:nth-child(2) .feature-icon { animation-delay: 0.5s; }
+    .feature:nth-child(3) .feature-icon { animation-delay: 1s; }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
     }
   </style>
 </head>
 <body>
-  <div class="main-wrapper">
-    <!-- Horizontal Testimonial Slider -->
-    <div class="testimonial-container">
-      <div class="testimonial-track">
-        <div class="testimonial-item">"Bhai ne 4,500 ka win karaya kal! 💥 Best tips ever!" – Rahul, Mumbai</div>
-        <div class="testimonial-item">"Free tip me bhi 1,200 ka profit! 😎 Ab to VIP join karunga" – Tushar, Delhi</div>
-        <div class="testimonial-item">"VIP leke toh life set hai bhai! 🔥 25K profit this month" – Mohit, Bangalore</div>
+  <div class="container">
+    <div class="sticker-container">
+      <div class="sticker">🎁</div>
+    </div>
+    
+    <h1 class="title">Free Giftcodes Daily</h1>
+    <p class="subtitle">Join 50K+ members</p>
+    
+    <button class="cta-btn" id="joinBtn">🚀 Join Telegram Now</button>
+    
+    <div class="live-badge">
+      <span class="pulse-dot"></span>
+      <span id="liveCount">247 online</span>
+    </div>
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-icon">💰</div>
+        <div class="stat-value">₹2.5L</div>
+        <div class="stat-label">Daily</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-value">100+</div>
+        <div class="stat-label">Codes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">Access</div>
       </div>
     </div>
-
-    <div class="center-card">
-      <div class="logo">🎯 Free Giftcodes Dailyy</div>
-      <div class="tagline">💯 Daily sureshot tips | 💸 Haar gaye toh paisa wapis</div>
-      <button class="cta-button" id="joinButton">👉 Join Telegram & Get Giftcodes Now</button>
-      <div class="redirect-timer" id="redirectTimer">Auto redirect in: 10 seconds</div>
-    </div>
-
-    <div class="trust-card">
-      <div>✅ 98% Sahi Predictions</div>
-      <div>💸 20 Lakh+ Withdrawals Har Mahine</div>
-      <div>🔁 100% Paisa Wapis Agar Loss Hua</div>
-    </div>
-
-    <div class="features">
-      <h2>🚀 Kya Milega?</h2>
-      <ul>
-        <li>🎯 Roz ke Sureshot Colour Tips</li>
-        <li>🔒 VIP Group ka Access</li>
-        <li>💰 Haar gaye toh paisa wapis</li>
-        <li>📞 Personal Support WhatsApp pe</li>
-        <li>🎁 Special Bonuses for VIP Members</li>
-      </ul>
-    </div>
-
     
-    <div class="live-counter" id="liveUsers">🔴 182 log abhi online hai</div>
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">🎰</span>
+        <span>Betting app bonuses</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎲</span>
+        <span>Casino giftcodes</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🔥</span>
+        <span>VIP exclusive offers</span>
+      </div>
+    </div>
   </div>
 
   <script>
     const TELEGRAM_LINK = "https://t.me/+yItJ4Kb5MlU2NWU1";
     
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set all links
-      document.getElementById('joinButton').onclick = function() {
-        window.location.href = TELEGRAM_LINK;
-      };
-      document.getElementById('popupJoinButton').onclick = function() {
-        window.location.href = TELEGRAM_LINK;
-      };
-      
-      // 10 second redirect timer
-      let timeLeft = 10;
-      const redirectTimer = document.getElementById('redirectTimer');
-      const timerInterval = setInterval(function() {
-        timeLeft--;
-        redirectTimer.textContent = `Auto redirect in: ${timeLeft} seconds`;
-        
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          window.location.href = TELEGRAM_LINK;
-        }
-      }, 1000);
-      
-      // Exit intent popup
-      let exitPopupShown = false;
-      let mouseY = 0;
-      
-      document.addEventListener('mouseout', function(e) {
-        if (!exitPopupShown && e.clientY < 0) {
-          showExitPopup();
-        }
-      });
-      
-      document.addEventListener('touchstart', function(e) {
-        mouseY = e.touches[0].clientY;
-      });
-      
-      document.addEventListener('touchmove', function(e) {
-        if (!exitPopupShown && e.touches[0].clientY - mouseY > 100) {
-          showExitPopup();
-        }
-      });
-      
-      function showExitPopup() {
-        document.getElementById('exitPopup').style.display = 'block';
-        exitPopupShown = true;
-        
-        setTimeout(function() {
-          if (document.getElementById('exitPopup').style.display === 'block') {
-            document.getElementById('exitPopup').style.display = 'none';
-          }
-        }, 15000);
-      }
-
-      // Fake live user count
-      let liveUsers = 182;
-      const userElement = document.getElementById('liveUsers');
-      
-      setInterval(() => {
-        let change = Math.floor(Math.random() * 8) * (Math.random() > 0.5 ? 1 : -1);
-        liveUsers = Math.max(160, liveUsers + change);
-        userElement.innerText = `🔴 ${liveUsers} log abhi online hai`;
-      }, 5000);
-      
-      // Pause animations when tab is not active
-      document.addEventListener('visibilitychange', function() {
-        const track = document.querySelector('.testimonial-track');
-        if (document.hidden) {
-          track.style.animationPlayState = 'paused';
-          clearInterval(timerInterval);
-        } else {
-          track.style.animationPlayState = 'running';
-        }
-      });
-    });
+    document.getElementById('joinBtn').onclick = () => {
+      window.location.href = TELEGRAM_LINK;
+    };
+    
+    // Auto redirect after 8 seconds
+    setTimeout(() => {
+      window.location.href = TELEGRAM_LINK;
+    }, 8000);
+    
+    // Live counter
+    let liveCount = 247;
+    const liveEl = document.getElementById('liveCount');
+    setInterval(() => {
+      const change = Math.floor(Math.random() * 8) - 3;
+      liveCount = Math.max(235, Math.min(270, liveCount + change));
+      liveEl.textContent = `${liveCount} online`;
+    }, 4000);
   </script>
 </body>
 </html>
