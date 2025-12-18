@@ -13,64 +13,178 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
+      background: #0d1117;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(139, 0, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 100, 0, 0.25) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.03) 2px, rgba(255, 215, 0, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 215, 0, 0.03) 2px, rgba(255, 215, 0, 0.03) 4px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
       color: #fff;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      overflow: hidden;
+      overflow-x: hidden;
+      position: relative;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        repeating-conic-gradient(from 0deg at 50% 50%, 
+          rgba(255, 215, 0, 0.02) 0deg, 
+          transparent 10deg, 
+          transparent 20deg, 
+          rgba(255, 215, 0, 0.02) 30deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Floating Background Stickers */
+    .bg-stickers {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bg-sticker {
+      position: absolute;
+      font-size: 40px;
+      opacity: 0.15;
+      animation: float-bg 15s infinite ease-in-out;
+    }
+    .bg-sticker:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .bg-sticker:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+    .bg-sticker:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+    .bg-sticker:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 6s; }
+    .bg-sticker:nth-child(5) { top: 50%; left: 5%; animation-delay: 1s; }
+    .bg-sticker:nth-child(6) { top: 60%; right: 5%; animation-delay: 3s; }
+    @keyframes float-bg {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+    
     .container {
       width: 100%;
       max-width: 380px;
       text-align: center;
-    }
-    
-    /* Animated Sticker */
-    .sticker-container {
-      margin-bottom: 30px;
       position: relative;
-    }
-    .sticker {
-      font-size: 120px;
-      display: inline-block;
-      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
-      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-    }
-    @keyframes glow {
-      0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); }
-      50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
+      z-index: 1;
     }
     
-    /* Title */
+    /* Main Animated Sticker */
+    .main-sticker {
+      font-size: 100px;
+      display: inline-block;
+      animation: spin-glow 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
+      margin-bottom: 20px;
+    }
+    @keyframes spin-glow {
+      0%, 100% { 
+        transform: rotate(0deg) scale(1);
+        filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
+      }
+      25% { transform: rotate(-15deg) scale(1.1); }
+      50% { 
+        transform: rotate(0deg) scale(1.15);
+        filter: drop-shadow(0 0 60px rgba(255, 215, 0, 1));
+      }
+      75% { transform: rotate(15deg) scale(1.1); }
+    }
+    
+    /* Flying Money/Cards Animation */
+    .flying-items {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      pointer-events: none;
+    }
+    .flying-item {
+      position: absolute;
+      font-size: 30px;
+      animation: fly-across 8s linear infinite;
+      opacity: 0;
+    }
+    .flying-item:nth-child(1) { top: 20%; animation-delay: 0s; }
+    .flying-item:nth-child(2) { top: 40%; animation-delay: 2s; }
+    .flying-item:nth-child(3) { top: 60%; animation-delay: 4s; }
+    .flying-item:nth-child(4) { top: 80%; animation-delay: 6s; }
+    @keyframes fly-across {
+      0% { left: -50px; opacity: 0; transform: rotate(0deg); }
+      10% { opacity: 0.8; }
+      50% { opacity: 1; transform: rotate(360deg); }
+      90% { opacity: 0.8; }
+      100% { left: 110%; opacity: 0; transform: rotate(720deg); }
+    }
+    
     .title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 700;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: pulse-text 2s ease-in-out infinite;
     }
+    @keyframes pulse-text {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    
     .subtitle {
       font-size: 14px;
       color: #888;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     
-    /* CTA Button - CENTERED AND ANIMATED */
+    /* Slot Machine Effect */
+    .slot-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .slot {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      animation: slot-spin 3s ease-in-out infinite;
+    }
+    .slot:nth-child(1) { animation-delay: 0s; }
+    .slot:nth-child(2) { animation-delay: 0.3s; }
+    .slot:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes slot-spin {
+      0%, 90%, 100% { transform: rotateX(0deg); }
+      30%, 60% { transform: rotateX(360deg); }
+    }
+    
+    /* CTA Button */
     .cta-btn {
       width: 100%;
-      padding: 20px;
-      font-size: 18px;
+      padding: 22px;
+      font-size: 19px;
       font-weight: 700;
-      background: linear-gradient(135deg, #ff4655, #ff1744);
+      background: linear-gradient(135deg, #ff4655, #ff1744, #d50000);
       border: none;
       border-radius: 50px;
       color: #fff;
@@ -78,41 +192,72 @@
       position: relative;
       overflow: hidden;
       margin: 0 auto 30px;
-      box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
-      animation: pulse-btn 2s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
+      animation: mega-pulse 2s ease-in-out infinite;
       transition: transform 0.2s;
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
     .cta-btn:before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
     }
-    .cta-btn:active:before {
-      width: 300px;
-      height: 300px;
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
-    .cta-btn:active {
-      transform: scale(0.95);
-    }
-    @keyframes pulse-btn {
+    @keyframes mega-pulse {
       0%, 100% { 
-        box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
+        box-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
         transform: scale(1);
       }
       50% { 
-        box-shadow: 0 10px 60px rgba(255, 23, 68, 0.8);
-        transform: scale(1.02);
+        box-shadow: 0 0 80px rgba(255, 23, 68, 1);
+        transform: scale(1.03);
       }
     }
+    .cta-btn:active {
+      transform: scale(0.97);
+    }
     
-    /* Minimal Stats */
+    /* Raining Giftcodes */
+    .giftcode-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .rain-code {
+      position: absolute;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffd700;
+      animation: rain-fall 6s linear infinite;
+      opacity: 0;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+    .rain-code:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .rain-code:nth-child(2) { left: 30%; animation-delay: 1.5s; }
+    .rain-code:nth-child(3) { left: 50%; animation-delay: 3s; }
+    .rain-code:nth-child(4) { left: 70%; animation-delay: 4.5s; }
+    .rain-code:nth-child(5) { left: 90%; animation-delay: 2s; }
+    @keyframes rain-fall {
+      0% { top: -50px; opacity: 0; transform: rotate(0deg); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 110%; opacity: 0; transform: rotate(360deg); }
+    }
+    
+    /* Stats with Casino Theme */
     .stats {
       display: flex;
       justify-content: space-around;
@@ -125,22 +270,24 @@
       text-align: center;
     }
     .stat-icon {
-      font-size: 32px;
+      font-size: 36px;
       margin-bottom: 5px;
       display: inline-block;
-      animation: bounce 2s ease-in-out infinite;
+      animation: bounce-rotate 3s ease-in-out infinite;
     }
     .stat:nth-child(1) .stat-icon { animation-delay: 0s; }
-    .stat:nth-child(2) .stat-icon { animation-delay: 0.3s; }
-    .stat:nth-child(3) .stat-icon { animation-delay: 0.6s; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .stat:nth-child(2) .stat-icon { animation-delay: 0.5s; }
+    .stat:nth-child(3) .stat-icon { animation-delay: 1s; }
+    @keyframes bounce-rotate {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-15px) rotate(-10deg); }
+      75% { transform: translateY(-15px) rotate(10deg); }
     }
     .stat-value {
       font-size: 18px;
       font-weight: 700;
       color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
     .stat-label {
       font-size: 11px;
@@ -151,12 +298,18 @@
     .live-badge {
       display: inline-flex;
       align-items: center;
-      background: rgba(76, 175, 80, 0.1);
-      border: 1px solid rgba(76, 175, 80, 0.3);
+      background: rgba(76, 175, 80, 0.15);
+      border: 1px solid rgba(76, 175, 80, 0.4);
       border-radius: 20px;
       padding: 8px 16px;
       font-size: 12px;
       color: #4caf50;
+      margin-bottom: 20px;
+      animation: glow-green 2s ease-in-out infinite;
+    }
+    @keyframes glow-green {
+      0%, 100% { box-shadow: 0 0 10px rgba(76, 175, 80, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); }
     }
     .pulse-dot {
       width: 6px;
@@ -164,54 +317,89 @@
       background: #4caf50;
       border-radius: 50%;
       margin-right: 8px;
-      animation: pulse-dot 1.5s infinite;
+      animation: pulse-dot 1s infinite;
     }
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(1.3); }
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 5px #4caf50; }
+      50% { opacity: 0.3; transform: scale(1.5); box-shadow: 0 0 10px #4caf50; }
     }
     
-    /* Features - Minimal */
+    /* Features */
     .features {
-      margin-top: 30px;
+      margin-top: 25px;
     }
     .feature {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 0;
+      padding: 10px 0;
       font-size: 13px;
       color: #999;
     }
     .feature-icon {
-      font-size: 24px;
-      margin-right: 10px;
-      animation: wiggle 3s ease-in-out infinite;
+      font-size: 28px;
+      margin-right: 12px;
+      animation: swing 4s ease-in-out infinite;
     }
     .feature:nth-child(1) .feature-icon { animation-delay: 0s; }
-    .feature:nth-child(2) .feature-icon { animation-delay: 0.5s; }
-    .feature:nth-child(3) .feature-icon { animation-delay: 1s; }
-    @keyframes wiggle {
+    .feature:nth-child(2) .feature-icon { animation-delay: 0.7s; }
+    .feature:nth-child(3) .feature-icon { animation-delay: 1.4s; }
+    .feature:nth-child(4) .feature-icon { animation-delay: 2.1s; }
+    @keyframes swing {
       0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-5deg); }
-      75% { transform: rotate(5deg); }
+      20% { transform: rotate(-15deg); }
+      40% { transform: rotate(15deg); }
+      60% { transform: rotate(-10deg); }
+      80% { transform: rotate(10deg); }
     }
   </style>
 </head>
 <body>
+  <!-- Background Floating Stickers -->
+  <div class="bg-stickers">
+    <div class="bg-sticker">🎰</div>
+    <div class="bg-sticker">💰</div>
+    <div class="bg-sticker">🎲</div>
+    <div class="bg-sticker">🃏</div>
+    <div class="bg-sticker">💎</div>
+    <div class="bg-sticker">🎁</div>
+  </div>
+  
+  <!-- Raining Giftcodes -->
+  <div class="giftcode-rain">
+    <div class="rain-code">FREE500</div>
+    <div class="rain-code">WIN1K</div>
+    <div class="rain-code">BONUS777</div>
+    <div class="rain-code">GIFT999</div>
+    <div class="rain-code">VIP250</div>
+  </div>
+  
   <div class="container">
-    <div class="sticker-container">
-      <div class="sticker">🎁</div>
+    <!-- Flying Items -->
+    <div class="flying-items">
+      <div class="flying-item">💵</div>
+      <div class="flying-item">🎴</div>
+      <div class="flying-item">💸</div>
+      <div class="flying-item">🎟️</div>
     </div>
     
-    <h1 class="title">Free Giftcodes Daily</h1>
-    <p class="subtitle">Join 50K+ members</p>
+    <div class="main-sticker">🎁</div>
     
-    <button class="cta-btn" id="joinBtn">🚀 Join Telegram Now</button>
+    <h1 class="title">Free Giftcodes Daily</h1>
+    <p class="subtitle">Join 50K+ winners</p>
+    
+    <!-- Slot Machine -->
+    <div class="slot-container">
+      <div class="slot">🎰</div>
+      <div class="slot">💰</div>
+      <div class="slot">🎲</div>
+    </div>
+    
+    <button class="cta-btn" id="joinBtn">🚀 Claim Your Bonus Now</button>
     
     <div class="live-badge">
       <span class="pulse-dot"></span>
-      <span id="liveCount">247 online</span>
+      <span id="liveCount">247 claiming now</span>
     </div>
     
     <div class="stats">
@@ -221,29 +409,33 @@
         <div class="stat-label">Daily</div>
       </div>
       <div class="stat">
-        <div class="stat-icon">⚡</div>
+        <div class="stat-icon">🎯</div>
         <div class="stat-value">100+</div>
         <div class="stat-label">Codes</div>
       </div>
       <div class="stat">
-        <div class="stat-icon">✅</div>
+        <div class="stat-icon">🔥</div>
         <div class="stat-value">24/7</div>
-        <div class="stat-label">Access</div>
+        <div class="stat-label">Live</div>
       </div>
     </div>
     
     <div class="features">
       <div class="feature">
         <span class="feature-icon">🎰</span>
-        <span>Betting app bonuses</span>
+        <span>Casino signup bonuses</span>
       </div>
       <div class="feature">
         <span class="feature-icon">🎲</span>
-        <span>Casino giftcodes</span>
+        <span>Betting app giftcodes</span>
       </div>
       <div class="feature">
-        <span class="feature-icon">🔥</span>
-        <span>VIP exclusive offers</span>
+        <span class="feature-icon">💎</span>
+        <span>VIP exclusive deals</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🃏</span>
+        <span>Poker room bonuses</span>
       </div>
     </div>
   </div>
@@ -255,19 +447,24 @@
       window.location.href = TELEGRAM_LINK;
     };
     
-    // Auto redirect after 8 seconds
-    setTimeout(() => {
-      window.location.href = TELEGRAM_LINK;
-    }, 8000);
-    
     // Live counter
     let liveCount = 247;
     const liveEl = document.getElementById('liveCount');
     setInterval(() => {
-      const change = Math.floor(Math.random() * 8) - 3;
-      liveCount = Math.max(235, Math.min(270, liveCount + change));
-      liveEl.textContent = `${liveCount} online`;
-    }, 4000);
+      const change = Math.floor(Math.random() * 12) - 5;
+      liveCount = Math.max(230, Math.min(280, liveCount + change));
+      liveEl.textContent = `${liveCount} claiming now`;
+    }, 3000);
+    
+    // Randomly change slot machine symbols
+    const slotSymbols = ['🎰', '💰', '🎲', '🎁', '💎', '🃏', '🔥', '⭐'];
+    const slots = document.querySelectorAll('.slot');
+    setInterval(() => {
+      slots.forEach(slot => {
+        const randomSymbol = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
+        slot.textContent = randomSymbol;
+      });
+    }, 3000);
   </script>
 </body>
 </html>
